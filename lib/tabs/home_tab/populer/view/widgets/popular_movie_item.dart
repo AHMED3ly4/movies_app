@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/shared/data/movie.dart';
 
@@ -34,7 +33,7 @@ class PopularMovieItem extends StatelessWidget {
                     ),
                     IconButton(
                         onPressed: (){},
-                        icon: Icon(
+                        icon: const Icon(
                             Icons.play_circle,
                           size: 60,
                         ),
@@ -54,11 +53,22 @@ class PopularMovieItem extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Image.network(
-                    height: screenHeight * 0.28,
-                    width: screenWidth *0.4,
-                    'https://image.tmdb.org/t/p/original${movie.posterPath}',
-                    fit: BoxFit.cover,
+                  Stack(
+                    alignment: AlignmentDirectional.topStart,
+                    children: [
+                      Image.network(
+                        height: screenHeight * 0.28,
+                        width: screenWidth *0.4,
+                        'https://image.tmdb.org/t/p/original${movie.posterPath}',
+                        fit: BoxFit.cover,
+                      ),
+                      IconButton(
+                          onPressed: (){},
+                          icon: const Icon(Icons.bookmark_add,
+                            size: 40,
+                          ),
+                      )
+                    ],
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.only(
