@@ -4,16 +4,17 @@ class AppTheme{
 static const whiteColor=Colors.white;
 static const goldColor=Color(0xFFFFBB3B);
 static const greyColor=Color(0xFFB5B4B4);
+static const darkGreyColor=Color(0xFF282A28);
 static ThemeData themeData= ThemeData.dark().copyWith(
 
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     selectedItemColor: goldColor,
     unselectedItemColor: Colors.white,
     unselectedLabelStyle: TextStyle(
       color: whiteColor,
     ),
   ),
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     titleSmall: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,

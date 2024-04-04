@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/shared/app_theme.dart';
 import 'package:movies_app/shared/home_screen.dart';
-import 'package:movies_app/tabs/home_tab/populer/data/data_source/popular_api_data_source.dart';
+import 'package:movies_app/tabs/home_tab/data/data_source/home_tab_api_data_source.dart';
 
 void main() {
-  runApp( MoviesApp());
+  runApp(MoviesApp());
 }
 
 

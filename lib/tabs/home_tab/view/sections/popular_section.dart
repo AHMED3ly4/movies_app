@@ -4,18 +4,20 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/shared/indicators/error_indicator.dart';
 import 'package:movies_app/shared/indicators/loading_endicator.dart';
-import 'package:movies_app/tabs/home_tab/populer/view/widgets/popular_slider.dart';
-import 'package:movies_app/tabs/home_tab/populer/view_model/popular_states.dart';
-import 'package:movies_app/tabs/home_tab/populer/view_model/popular_view_model.dart';
-class PopularView extends StatefulWidget {
-  const PopularView({super.key});
+import 'package:movies_app/tabs/home_tab/view/widgets/popular_slider.dart';
+
+import '../../view_model/popular_states.dart';
+import '../../view_model/home_tab_view_model.dart';
+
+class PopularSection extends StatefulWidget {
+  const PopularSection({super.key});
 
   @override
-  State<PopularView> createState() => _PopularViewState();
+  State<PopularSection> createState() => _PopularSectionState();
 }
 
-class _PopularViewState extends State<PopularView> {
-  final viewModel =PopularViewModel();
+class _PopularSectionState extends State<PopularSection> {
+  final viewModel =HomeTabViewModel();
 @override
   void initState() {
     super.initState();
@@ -27,7 +29,7 @@ class _PopularViewState extends State<PopularView> {
 
     return BlocProvider(
       create:(context) =>  viewModel,
-      child: BlocBuilder<PopularViewModel,PopularStates>(
+      child: BlocBuilder<HomeTabViewModel,HomeTabStates>(
           builder: (context, state) {
             if(state is GetPopularMoviesError){
               return ErrorIndicator(errorMessage: state.errorMessage,);
@@ -35,7 +37,6 @@ class _PopularViewState extends State<PopularView> {
               return const LoadingIndicator();
             } else if(state is GetPopularMoviesSuccess){
               final movies = state.movies;
-
               return PopularSlider(movies);
             }else{
               return const Text('wait');
