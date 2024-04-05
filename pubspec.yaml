@@ -39,6 +39,7 @@ dependencies:
   fluttertoast: ^8.2.4
   flutter_bloc: ^8.1.5
   carousel_slider: ^4.2.1
+  cached_network_image: ^3.3.1
 
 
 dev_dependencies:

@@ -7,14 +7,14 @@ class MoviesListSection extends StatelessWidget {
   final String label;
   final bool hasBottomDescription;
   final List<Movie> movies;
-   MoviesListSection(this.label, this.movies, {this.hasBottomDescription =true});
+   MoviesListSection(this.label, this.movies, {this.hasBottomDescription =false});
 
   @override
   Widget build(BuildContext context) {
     final screenHeight =MediaQuery.of(context).size.height;
     final screenWidth =MediaQuery.of(context).size.width;
     return Container(
-      height: screenHeight * 0.26,
+      height: hasBottomDescription? screenHeight * 0.3:screenHeight * 0.26,
       color: AppTheme.darkGreyColor,
       width: double.infinity,
       padding: const EdgeInsets.all(8),
@@ -22,15 +22,14 @@ class MoviesListSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "New Released",
+            label,
             style: Theme.of(context).textTheme.titleSmall,
           ),
           Expanded(
-
             child: ListView.builder(
               itemCount: movies.length,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => MoviesListSectionItem(movie: movies[index]),
+              itemBuilder: (context, index) => MoviesListSectionItem(movie: movies[index],hasBottomDescription: hasBottomDescription,),
             ),
           ),
         ],

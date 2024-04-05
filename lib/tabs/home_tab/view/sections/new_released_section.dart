@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/shared/app_theme.dart';
 import 'package:movies_app/shared/widgets/movies_list_section.dart';
 import 'package:movies_app/tabs/home_tab/view_model/home_tab_view_model.dart';
-import 'package:movies_app/tabs/home_tab/view_model/popular_states.dart';
+import 'package:movies_app/tabs/home_tab/view_model/home_tab_states.dart';
 
 import '../../../../shared/indicators/error_indicator.dart';
-import '../../../../shared/indicators/loading_endicator.dart';
+import '../../../../shared/indicators/loading_indicator.dart';
 import '../widgets/popular_slider.dart';
 
 class NewReleasedSection extends StatefulWidget {
@@ -37,7 +37,7 @@ class _NewReleasedSectionState extends State<NewReleasedSection> {
               return ErrorIndicator(errorMessage: state.errorMessage,);
             }else if(state is GetNewReleasedMoviesLoading){
               return const LoadingIndicator();
-            } else if(state is GetPopularMoviesSuccess){
+            } else if(state is GetNewReleasedMoviesSuccess){
               final movies = state.movies;
               return MoviesListSection('New Released', movies);
             }else{

@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/shared/data/movie.dart';
+
+import '../../../../shared/indicators/loading_indicator.dart';
 
 class PopularMovieItem extends StatelessWidget {
   final Movie movie;
@@ -18,10 +21,14 @@ class PopularMovieItem extends StatelessWidget {
             Stack(
               alignment: AlignmentDirectional.center,
               children: [
-                Image.network(
-                  'https://image.tmdb.org/t/p/original${movie.backdropPath}',
-                  fit: BoxFit.fill,
+                CachedNetworkImage(
+                  imageUrl: 'https://image.tmdb.org/t/p/original${movie.backdropPath}',
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      const LoadingIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   width: double.infinity-8,
+                  height: screenHeight *0.27,
+                  fit: BoxFit.fill,
                 ),
                 IconButton(
                     onPressed: (){},
@@ -46,24 +53,24 @@ class PopularMovieItem extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    Image.network(
+                    CachedNetworkImage(
+                      imageUrl: 'https://image.tmdb.org/t/p/original${movie.posterPath}',
+                      placeholder: (context, url) => const LoadingIndicator(),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
                       height: screenHeight * 0.24,
                       width: screenWidth *0.4,
-                      'https://image.tmdb.org/t/p/original${movie.posterPath}',
                       fit: BoxFit.fill,
                     ),
-                    IconButton(
-                        onPressed: (){},
-                        icon: const Icon(Icons.bookmark_add,
-                          size: 40,
-                        ),
-                    )
+                    InkWell(
+                      onTap: (){},
+                      child: Image.asset('assets/images/bookmark.png',),
+                    ),
                   ],
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.only(
                       start: 8,
-                      top: screenHeight *0.3 +5
+                      top: screenHeight *0.27 +5
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

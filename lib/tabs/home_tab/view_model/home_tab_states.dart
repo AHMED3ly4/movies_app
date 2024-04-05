@@ -35,3 +35,19 @@ class GetNewReleasedMoviesError extends HomeTabStates{
   GetNewReleasedMoviesError(this.errorMessage);
 
 }
+
+class GetRecommendedMoviesLoading extends HomeTabStates{}
+
+class GetRecommendedMoviesSuccess extends HomeTabStates{
+  final List<Movie> movies;
+
+  GetRecommendedMoviesSuccess(this.movies);
+
+}
+
+class GetRecommendedMoviesError extends HomeTabStates{
+  final String errorMessage;
+
+  GetRecommendedMoviesError(this.errorMessage);
+
+}

@@ -1,6 +1,6 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/tabs/home_tab/view_model/popular_states.dart';
+import 'package:movies_app/tabs/home_tab/view_model/home_tab_states.dart';
 import '../data/repository/home_tab_repository.dart';
 
 class HomeTabViewModel extends Cubit<HomeTabStates>{
@@ -20,10 +20,20 @@ class HomeTabViewModel extends Cubit<HomeTabStates>{
   Future<void> getNewReleasedMovies() async{
     emit(GetNewReleasedMoviesLoading());
     try{
-      final movies = await repository.getPopularMovies();
-      emit(GetPopularMoviesSuccess(movies));
+      final movies = await repository.getNewReleasedMovies();
+      emit(GetNewReleasedMoviesSuccess(movies));
     }catch(error){
       emit(GetNewReleasedMoviesError(error.toString()));
+    }
+  }
+  
+  Future<void> getRecommendedMovies() async{
+    emit(GetRecommendedMoviesLoading());
+    try{
+      final movies = await repository.getRecommendedMovies();
+      emit(GetRecommendedMoviesSuccess(movies));
+    }catch(error){
+      emit(GetRecommendedMoviesError(error.toString()));
     }
   }
 
