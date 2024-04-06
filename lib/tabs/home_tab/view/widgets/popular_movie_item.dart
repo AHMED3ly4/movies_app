@@ -1,8 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/shared/data/movie.dart';
+import 'package:movies_app/screens/movie_details_screen/view/movie_details_screen.dart';
+import 'package:movies_app/tabs/home_tab/view/widgets/movie_back_drop.dart';
+import 'package:movies_app/tabs/home_tab/view/widgets/movie_poster.dart';
 
-import '../../../../shared/indicators/loading_indicator.dart';
 
 class PopularMovieItem extends StatelessWidget {
   final Movie movie;
@@ -10,36 +11,19 @@ class PopularMovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final adult = movie.adult ? '+18':'';
+    final adult = movie.adult ?? false ? '+18':''  '';
     final screenHeight =MediaQuery.of(context).size.height;
     final screenWidth =MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        Stack(
-          alignment: AlignmentDirectional.bottomStart,
-          children: [
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                CachedNetworkImage(
-                  imageUrl: 'https://image.tmdb.org/t/p/original${movie.backdropPath}',
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      const LoadingIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                  width: double.infinity-8,
-                  height: screenHeight *0.27,
-                  fit: BoxFit.fill,
-                ),
-                IconButton(
-                    onPressed: (){},
-                    icon: const Icon(
-                        Icons.play_circle,
-                      size: 60,
-                    ),
-                ),
-              ],
-            ),
-          ],
+        InkWell(
+          onTap: (){
+            Navigator.of(context).pushNamed(
+                MovieDetailsScreen.routeName,
+                arguments: movie,
+            );
+          },
+            child: MovieBackDrop(backdropPath: movie.backdropPath ?? '' ),
         ),
         Align(
           alignment: AlignmentDirectional.bottomStart,
@@ -51,21 +35,14 @@ class PopularMovieItem extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Stack(
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: 'https://image.tmdb.org/t/p/original${movie.posterPath}',
-                      placeholder: (context, url) => const LoadingIndicator(),
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
-                      height: screenHeight * 0.24,
-                      width: screenWidth *0.4,
-                      fit: BoxFit.fill,
-                    ),
-                    InkWell(
-                      onTap: (){},
-                      child: Image.asset('assets/images/bookmark.png',),
-                    ),
-                  ],
+                InkWell(
+                  onTap: (){
+                    Navigator.of(context).pushNamed(
+                        MovieDetailsScreen.routeName,
+                        arguments: movie,
+                    );
+                  },
+                    child: MoviePoster(poster: movie.posterPath ?? ''),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.only(
@@ -78,13 +55,13 @@ class PopularMovieItem extends StatelessWidget {
                       SizedBox(
                         width: screenWidth*0.5,
                         child: Text(
-                          movie.title,
+                          movie.title ?? '',
                           style: Theme.of(context).textTheme.titleSmall,
                           overflow: TextOverflow.clip,
                         ),
                       ),
                       Text(
-                        '${movie.releaseDate.substring(0, 4)} $adult ' ,
+                        '${movie.releaseDate?.substring(0, 4)} $adult ' ,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],

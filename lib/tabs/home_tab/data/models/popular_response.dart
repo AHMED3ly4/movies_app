@@ -19,13 +19,6 @@ class PopularResponse {
     totalResults = json['total_results'];
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['page'] = page;
-    _data['results'] = movies.map((e)=>e.toJson()).toList();
-    _data['total_pages'] = totalPages;
-    _data['total_results'] = totalResults;
-    return _data;
-  }
+
 }
 

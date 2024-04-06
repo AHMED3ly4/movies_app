@@ -48,7 +48,6 @@ class HomeTabApiDataSource extends HomeTabDataSource{
    );
 
    final json = jsonDecode(response.body);
-   print(response.body);
    final newReleasedResponse = NewReleasedResponse.fromJson(json);
    return newReleasedResponse.movies;
 
@@ -73,7 +72,6 @@ class HomeTabApiDataSource extends HomeTabDataSource{
    );
 
    final json = jsonDecode(response.body);
-   print(response.body);
    final recommendedResponse = RecommendedResponse.fromJson(json);
    return recommendedResponse.movies;
  }
