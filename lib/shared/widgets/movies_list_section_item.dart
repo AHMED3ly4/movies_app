@@ -37,7 +37,7 @@ class MoviesListSectionItem extends StatelessWidget {
                           'https://image.tmdb.org/t/p/original${movie.posterPath}',
                       placeholder: (context, url) => const LoadingIndicator(),
                       errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                          const Center(child:  Icon(Icons.error)),
                       width: screenWidth * 0.3,
                       fit: BoxFit.fill,
                     ),
@@ -85,12 +85,12 @@ class MoviesListSectionItem extends StatelessWidget {
                           .titleSmall!
                           .copyWith(fontSize: 12),
                     ),
-                    Text(
+                    movie.releaseDate !='' && movie.releaseDate != null ? Text(
                       '${movie.releaseDate?.substring(0, 4)} R 1h 59m',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall,
-                    ),
+                    ) : SizedBox(),
                   ],
                 ),
               ),

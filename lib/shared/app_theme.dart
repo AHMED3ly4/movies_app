@@ -18,7 +18,7 @@ static ThemeData themeData= ThemeData.dark().copyWith(
     ),
   ),
   scaffoldBackgroundColor: blackColor,
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     titleTextStyle: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w400,
