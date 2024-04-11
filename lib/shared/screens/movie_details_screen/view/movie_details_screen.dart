@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/screens/movie_details_screen/view/widget/more_like_this_section.dart';
-import 'package:movies_app/screens/movie_details_screen/view/widget/movie_details_section.dart';
 import 'package:movies_app/shared/data/movie.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/view/widget/more_like_this_section.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/view/widget/movie_details_section.dart';
 
 
 class MovieDetailsScreen extends StatelessWidget {

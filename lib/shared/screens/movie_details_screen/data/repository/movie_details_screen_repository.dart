@@ -1,8 +1,8 @@
-import 'package:movies_app/screens/movie_details_screen/data/data_source/movie_details_data_source.dart';
-import 'package:movies_app/screens/movie_details_screen/data/models/movie_details.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/data/data_source/movie_details_data_source.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/data/models/movie_details.dart';
 import 'package:movies_app/shared/sources_locator.dart';
 
-import '../../../../shared/data/movie.dart';
+import '../../../../data/movie.dart';
 
 class MovieDetailsScreenRepository{
   final MovieDetailsDataSource movieDetailsDataSource = SourcesLocator.movieDetailsSource;

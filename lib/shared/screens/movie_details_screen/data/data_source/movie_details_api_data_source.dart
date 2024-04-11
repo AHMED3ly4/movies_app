@@ -1,11 +1,11 @@
 import 'dart:convert';
-
-import 'package:movies_app/screens/movie_details_screen/data/data_source/movie_details_api_constants.dart';
-import 'package:movies_app/screens/movie_details_screen/data/data_source/movie_details_data_source.dart';
-import 'package:movies_app/screens/movie_details_screen/data/models/more_like_this_response.dart';
-import 'package:movies_app/screens/movie_details_screen/data/models/movie_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/shared/data/movie.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/data/data_source/movie_details_api_constants.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/data/data_source/movie_details_data_source.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/data/models/more_like_this_response.dart';
+
+import '../models/movie_details.dart';
 
 class MovieDetailsApiDataSource extends MovieDetailsDataSource{
 

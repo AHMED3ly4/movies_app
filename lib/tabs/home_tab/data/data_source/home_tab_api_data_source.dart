@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/shared/data/movie.dart';
-import 'package:movies_app/tabs/home_tab/data/data_source/home_tab_apis_constants.dart';
+import 'package:movies_app/tabs/home_tab/data/data_source/home_tab_api_constants.dart';
 import 'package:movies_app/tabs/home_tab/data/data_source/home_tab_data_source.dart';
 import 'package:movies_app/tabs/home_tab/data/models/new_released_response.dart';
 import 'package:movies_app/tabs/home_tab/data/models/recommended_response.dart';

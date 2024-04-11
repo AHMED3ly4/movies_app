@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/screens/movie_details_screen/view_model/movie_details_screen_states.dart';
-import 'package:movies_app/screens/movie_details_screen/view_model/movie_details_screen_view_model.dart';
 import 'package:movies_app/shared/indicators/error_indicator.dart';
 import 'package:movies_app/shared/indicators/loading_indicator.dart';
 import 'package:movies_app/tabs/home_tab/view/widgets/movie_back_drop.dart';
-
-import '../../../../shared/app_theme.dart';
-import '../../../../tabs/home_tab/view/widgets/movie_poster.dart';
+import '../../../../../tabs/home_tab/view/widgets/movie_poster.dart';
+import '../../../../app_theme.dart';
+import '../../view_model/movie_details_screen_states.dart';
+import '../../view_model/movie_details_screen_view_model.dart';
 
 class MovieDetailsSection extends StatefulWidget {
   final String movieID;

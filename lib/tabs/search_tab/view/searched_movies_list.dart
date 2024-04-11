@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/tabs/search_tab/view/widgets/searched_movie_item.dart';
+import 'package:movies_app/shared/widgets/searched_movie_item.dart';
 import 'package:movies_app/tabs/search_tab/view_model/search_tab_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +19,6 @@ class _SearchedMovieListState extends State<SearchedMovieList> {
     return ListView.builder(
       itemCount: provider.movies.length,
       itemBuilder: (context, index) {
-        print('Building item at index $index');
         return SearchedMovieItem(movie: provider.movies[index]);
       },
     );
