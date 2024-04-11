@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/shared/data/movie.dart';
 import 'package:movies_app/tabs/search_tab/data/data_source/search_tab_data_source.dart';
-import 'package:movies_app/tabs/search_tab/data/models/search_result.dart';
+import 'package:movies_app/shared/data/search_result.dart';
 
 class SearchTabAPIDataSource extends SearchTabDataSource{
 

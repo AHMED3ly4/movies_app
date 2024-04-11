@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/tabs/browse_tab.dart';
+import 'package:movies_app/tabs/browse_tab/view/browse_tab.dart';
 import 'package:movies_app/tabs/home_tab/home_tab.dart';
 import 'package:movies_app/tabs/search_tab/view/search_tab.dart';
 import 'package:movies_app/tabs/watchlist_tab.dart';
@@ -11,7 +11,7 @@ static const routeName='/';
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex=1;
+  int selectedIndex=2;
   List<Widget> tabs=[
     HomeTab(),
     SearchTab(),

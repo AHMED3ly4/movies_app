@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/screens/movie_details_screen/view_model/movie_details_screen_states.dart';
-import 'package:movies_app/screens/movie_details_screen/view_model/movie_details_screen_view_model.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/view_model/movie_details_screen_states.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/view_model/movie_details_screen_view_model.dart';
 import 'package:movies_app/shared/widgets/movies_list_section.dart';
-
-import '../../../../shared/indicators/error_indicator.dart';
-import '../../../../shared/indicators/loading_indicator.dart';
+import '../../../../indicators/error_indicator.dart';
+import '../../../../indicators/loading_indicator.dart';
 
 class MoreLikeThisSection extends StatefulWidget {
   final String movieID;

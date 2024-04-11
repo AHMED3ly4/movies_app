@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/shared/data/movie.dart';
-import 'package:movies_app/screens/movie_details_screen/view/movie_details_screen.dart';
 import 'package:movies_app/tabs/home_tab/view/widgets/movie_back_drop.dart';
 import 'package:movies_app/tabs/home_tab/view/widgets/movie_poster.dart';
+
+import '../../../../shared/screens/movie_details_screen/view/movie_details_screen.dart';
 
 
 class PopularMovieItem extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:movies_app/shared/indicators/loading_indicator.dart';
-import '../../screens/movie_details_screen/view/movie_details_screen.dart';
 import '../app_theme.dart';
 import '../data/movie.dart';
+import '../screens/movie_details_screen/view/movie_details_screen.dart';
 
 class MoviesListSectionItem extends StatelessWidget {
   final Movie movie;

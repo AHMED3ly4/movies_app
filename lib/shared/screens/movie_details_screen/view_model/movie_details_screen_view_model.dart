@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/screens/movie_details_screen/data/repository/movie_details_screen_repository.dart';
-import 'package:movies_app/screens/movie_details_screen/view_model/movie_details_screen_states.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/data/repository/movie_details_screen_repository.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/view_model/movie_details_screen_states.dart';
 
 class MovieDetailsScreenViewModel extends Cubit<MovieDetailsScreenStates>{
   MovieDetailsScreenViewModel() : super(MovieDetailsScreenInitial());

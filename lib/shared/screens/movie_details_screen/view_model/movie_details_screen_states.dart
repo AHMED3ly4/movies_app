@@ -1,5 +1,5 @@
-import 'package:movies_app/screens/movie_details_screen/data/models/movie_details.dart';
 import 'package:movies_app/shared/data/movie.dart';
+import 'package:movies_app/shared/screens/movie_details_screen/data/models/movie_details.dart';
 
 abstract class MovieDetailsScreenStates{}
 
