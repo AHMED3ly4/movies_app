@@ -16,7 +16,6 @@ class FirebaseUtils{
     final collectionReference =getWatchListCollection();
     final doc =collectionReference.doc(movie.id.toString());
     return doc.set(movie);
-
   }
 
 

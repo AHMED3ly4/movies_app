@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:movies_app/shared/app_theme.dart';
 import 'package:movies_app/shared/data/firebase_utils.dart';
 import 'package:movies_app/shared/providers/watchlist_provider.dart';
@@ -74,8 +75,22 @@ class SearchedMovieItem extends StatelessWidget {
                 isWatchList ?
                 InkWell(
                   onTap: () async {
-                    FirebaseUtils.deleteMovieFromWatchList(movie.id!);
-                    Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                    FirebaseUtils.deleteMovieFromWatchList(movie.id!).timeout(
+                        const Duration(milliseconds: 100),
+                        onTimeout: (){
+                          Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                        }
+                    ).catchError((e){
+                      Fluttertoast.showToast(
+                          msg: e.toString(),
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
+                    });
                   },
                   child: Image.asset(
                     'assets/images/bookmark_done.png',
@@ -83,8 +98,22 @@ class SearchedMovieItem extends StatelessWidget {
                 ) :
                 InkWell(
                   onTap: () async {
-                    FirebaseUtils.addMovieToWatchList(movie);
-                    Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                    FirebaseUtils.addMovieToWatchList(movie).timeout(
+                        const Duration(milliseconds: 100),
+                        onTimeout: (){
+                          Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                        }
+                    ).catchError((e){
+                      Fluttertoast.showToast(
+                          msg: e.toString(),
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
+                    });
                   },
                   child: Image.asset(
                     'assets/images/bookmark.png',

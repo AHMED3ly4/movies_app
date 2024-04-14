@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:movies_app/shared/data/firebase_utils.dart';
 import 'package:movies_app/shared/indicators/loading_indicator.dart';
 import 'package:movies_app/shared/providers/watchlist_provider.dart';
@@ -7,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../app_theme.dart';
 import '../data/movie.dart';
 import '../screens/movie_details_screen/view/movie_details_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MoviesListSectionItem extends StatefulWidget {
   final Movie movie;
@@ -57,8 +57,23 @@ class _MoviesListSectionItemState extends State<MoviesListSectionItem> {
                   isWatchList ?
                   InkWell(
                     onTap: () async {
-                      FirebaseUtils.deleteMovieFromWatchList(widget.movie.id!);
-                      Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                      FirebaseUtils.deleteMovieFromWatchList(widget.movie.id!).timeout(
+                        const Duration(milliseconds: 100),
+                        onTimeout: (){
+                          Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                        }
+                      ).catchError((e){
+                        Fluttertoast.showToast(
+                            msg: e.toString(),
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0
+                        );
+                      });
+
                     },
                     child: Image.asset(
                       'assets/images/bookmark_done.png',
@@ -66,8 +81,22 @@ class _MoviesListSectionItemState extends State<MoviesListSectionItem> {
                   ) :
                   InkWell(
                     onTap: () async {
-                      FirebaseUtils.addMovieToWatchList(widget.movie);
-                      Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                      FirebaseUtils.addMovieToWatchList(widget.movie).timeout(
+                          const Duration(milliseconds: 100),
+                          onTimeout: (){
+                            Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                          }
+                      ).catchError((e){
+                        Fluttertoast.showToast(
+                            msg: e.toString(),
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0
+                        );
+                      });
                     },
                     child: Image.asset(
                       'assets/images/bookmark.png',

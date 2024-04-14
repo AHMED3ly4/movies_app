@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:movies_app/shared/data/movie.dart';
 import 'package:provider/provider.dart';
 
@@ -30,8 +31,22 @@ class MoviePoster extends StatelessWidget {
         isWatchList ?
         InkWell(
           onTap: () async {
-            FirebaseUtils.deleteMovieFromWatchList(movie.id!);
-            Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+            FirebaseUtils.deleteMovieFromWatchList(movie.id!).timeout(
+                const Duration(milliseconds: 100),
+                onTimeout: (){
+                  Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                }
+            ).catchError((e){
+              Fluttertoast.showToast(
+                  msg: e.toString(),
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+            });
           },
           child: Image.asset(
             'assets/images/bookmark_done.png',
@@ -39,8 +54,22 @@ class MoviePoster extends StatelessWidget {
         ) :
         InkWell(
           onTap: () async {
-            FirebaseUtils.addMovieToWatchList(movie);
-            Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+            FirebaseUtils.addMovieToWatchList(movie).timeout(
+                const Duration(milliseconds: 100),
+                onTimeout: (){
+                  Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                }
+            ).catchError((e){
+              Fluttertoast.showToast(
+                  msg: e.toString(),
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+            });
           },
           child: Image.asset(
             'assets/images/bookmark.png',
