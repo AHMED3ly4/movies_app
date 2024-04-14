@@ -18,7 +18,7 @@ class CategoryItem extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Image.asset(
-            'assets/images/categories_image.png',
+            'assets/images/Grand staircase.jpg',
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.fill,
