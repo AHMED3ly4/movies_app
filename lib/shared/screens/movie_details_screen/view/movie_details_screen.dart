@@ -22,7 +22,7 @@ class MovieDetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            MovieDetailsSection(movieID: movie.id.toString()),
+            MovieDetailsSection(movie: movie),
             MoreLikeThisSection(movieID: movie.id.toString()),
           ],
         ),

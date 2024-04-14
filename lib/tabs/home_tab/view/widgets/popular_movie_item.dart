@@ -43,7 +43,7 @@ class PopularMovieItem extends StatelessWidget {
                         arguments: movie,
                     );
                   },
-                    child: MoviePoster(poster: movie.posterPath ?? ''),
+                    child: MoviePoster(movie: movie,),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.only(

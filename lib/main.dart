@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/shared/app_theme.dart';
 import 'package:movies_app/shared/home_screen.dart';
@@ -10,9 +11,10 @@ import 'package:provider/provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseFirestore.instance.disableNetwork();
   runApp(
     ChangeNotifierProvider(
-        create: (context) => WatchlistProvider(),
+        create: (context) => WatchlistProvider()..getWatchListMovies(),
       child: MoviesApp(),
     )
   );
@@ -23,7 +25,7 @@ class MoviesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,

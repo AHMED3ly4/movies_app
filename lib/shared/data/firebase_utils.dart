@@ -5,7 +5,6 @@ import 'package:movies_app/shared/data/movie.dart';
 class FirebaseUtils{
   static CollectionReference <Movie> getWatchListCollection(){
     final db = FirebaseFirestore.instance;
-    db.disableNetwork();
     return db.collection('watchListMovies').withConverter(
       fromFirestore: (snapshot, _) => Movie.fromJson(snapshot.data()),
       toFirestore: (movie, options) =>movie.toJson(),

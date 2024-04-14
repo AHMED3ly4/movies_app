@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/shared/data/movie.dart';
 import 'package:movies_app/shared/indicators/error_indicator.dart';
 import 'package:movies_app/shared/indicators/loading_indicator.dart';
-import 'package:movies_app/tabs/browse_tab/view/screens/category_movies_screen.dart';
 import 'package:movies_app/tabs/home_tab/view/widgets/movie_back_drop.dart';
 import '../../../../../tabs/home_tab/view/widgets/movie_poster.dart';
 import '../../../../app_theme.dart';
@@ -10,8 +10,8 @@ import '../../view_model/movie_details_screen_states.dart';
 import '../../view_model/movie_details_screen_view_model.dart';
 
 class MovieDetailsSection extends StatefulWidget {
-  final String movieID;
-  const MovieDetailsSection({super.key, required this.movieID});
+  final Movie movie;
+  const MovieDetailsSection({super.key, required this.movie});
 
   @override
   State<MovieDetailsSection> createState() => _MovieDetailsSectionState();
@@ -24,7 +24,7 @@ class _MovieDetailsSectionState extends State<MovieDetailsSection> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewModel.getMovieDetails(movieID: widget.movieID);
+    viewModel.getMovieDetails(movieID: widget.movie.id.toString());
   }
 
 
@@ -71,7 +71,7 @@ class _MovieDetailsSectionState extends State<MovieDetailsSection> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              MoviePoster(poster: movie.posterPath ?? ''),
+                              MoviePoster(movie: widget.movie,),
                               const SizedBox(width: 8,),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
