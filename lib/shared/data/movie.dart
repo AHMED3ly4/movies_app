@@ -47,5 +47,23 @@ class Movie {
     voteCount = json?['vote_count'];
   }
 
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['adult'] = adult;
+    _data['backdrop_path'] = backdropPath;
+    _data['genre_ids'] = genreIds;
+    _data['id'] = id;
+    _data['original_language'] = originalLanguage;
+    _data['original_title'] = originalTitle;
+    _data['overview'] = overview;
+    _data['popularity'] = popularity;
+    _data['poster_path'] = posterPath;
+    _data['release_date'] = releaseDate;
+    _data['title'] = title;
+    _data['video'] = video;
+    _data['vote_average'] = voteAverage;
+    _data['vote_count'] = voteCount;
+    return _data;
+  }
 
 }

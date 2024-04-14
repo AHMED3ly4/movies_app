@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/shared/indicators/error_indicator.dart';
 import 'package:movies_app/shared/indicators/loading_indicator.dart';
+import 'package:movies_app/tabs/browse_tab/view/screens/category_movies_screen.dart';
 import 'package:movies_app/tabs/home_tab/view/widgets/movie_back_drop.dart';
 import '../../../../../tabs/home_tab/view/widgets/movie_poster.dart';
 import '../../../../app_theme.dart';

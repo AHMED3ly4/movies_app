@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/tabs/browse_tab/view/browse_tab.dart';
 import 'package:movies_app/tabs/home_tab/home_tab.dart';
 import 'package:movies_app/tabs/search_tab/view/search_tab.dart';
-import 'package:movies_app/tabs/watchlist_tab.dart';
+import 'package:movies_app/tabs/watchlist_tab/watchlist_tab.dart';
 
 class HomeScreen extends StatefulWidget {
 static const routeName='/';
@@ -11,13 +11,14 @@ static const routeName='/';
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex=2;
+  int selectedIndex=3;
   List<Widget> tabs=[
     HomeTab(),
     SearchTab(),
     BrowseTab(),
     WatchlistTab(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
