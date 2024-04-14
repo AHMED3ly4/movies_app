@@ -32,7 +32,7 @@ class _WatchlistTabState extends State<WatchlistTab> {
             child: ListView.builder(
               itemCount: watchListMovies.length,
               itemBuilder: (context, index) {
-                return Expanded(child: SearchedMovieItem(movie: watchListMovies[index]));
+                return SearchedMovieItem(movie: watchListMovies[index]);
               },
             ),
           ),

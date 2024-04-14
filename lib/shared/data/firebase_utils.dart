@@ -1,28 +1,26 @@
-import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movies_app/shared/data/movie.dart';
 
 class FirebaseUtils{
-  static CollectionReference <Movie> getWatchListCollection()=>
-      FirebaseFirestore.instance.collection('watchListMovies').withConverter(
-          fromFirestore: (snapshot, _) => Movie.fromJson(snapshot.data()),
-          toFirestore: (movie, options) =>movie.toJson(),
-      );
+  static CollectionReference <Movie> getWatchListCollection(){
+    final db = FirebaseFirestore.instance;
+    db.disableNetwork();
+    return db.collection('watchListMovies').withConverter(
+      fromFirestore: (snapshot, _) => Movie.fromJson(snapshot.data()),
+      toFirestore: (movie, options) =>movie.toJson(),
+    );
+  }
 
-  static Future<void> addMovieToWatchList(Movie movie){
+
+  static Future<void> addMovieToWatchList(Movie movie)async {
     final collectionReference =getWatchListCollection();
     final doc =collectionReference.doc(movie.id.toString());
     return doc.set(movie);
+
   }
 
-  static Future<void> editMovieWatchList(int movieId,bool newState){
-    final collectionReference =getWatchListCollection();
-    final doc =collectionReference.doc(movieId.toString());
-    return doc.update({
-      'is_watchlist' : newState,
-    });
-  }
+
 
   static Future<void> deleteMovieFromWatchList(int movieId){
     final collectionReference =getWatchListCollection();

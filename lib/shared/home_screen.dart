@@ -11,7 +11,7 @@ static const routeName='/';
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex=3;
+  int selectedIndex=0;
   List<Widget> tabs=[
     HomeTab(),
     SearchTab(),
