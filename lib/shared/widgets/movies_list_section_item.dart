@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:movies_app/shared/data/firebase_utils.dart';
 import 'package:movies_app/shared/indicators/loading_indicator.dart';
+import 'package:movies_app/shared/providers/watchlist_provider.dart';
+import 'package:provider/provider.dart';
 import '../app_theme.dart';
 import '../data/movie.dart';
 import '../screens/movie_details_screen/view/movie_details_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class MoviesListSectionItem extends StatelessWidget {
+class MoviesListSectionItem extends StatefulWidget {
   final Movie movie;
   final bool hasBottomDescription;
   const MoviesListSectionItem(
       {super.key, required this.movie, required this.hasBottomDescription});
 
   @override
+  State<MoviesListSectionItem> createState() => _MoviesListSectionItemState();
+}
+
+class _MoviesListSectionItemState extends State<MoviesListSectionItem> {
+
+
+
+  @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
+    bool isWatchList =Provider.of<WatchlistProvider>(context).isWatchlist(widget.movie.id!);
     final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
       width: screenWidth * 0.3,
@@ -29,12 +41,12 @@ class MoviesListSectionItem extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).pushNamed(
                         MovieDetailsScreen.routeName,
-                        arguments: movie,
+                        arguments: widget.movie,
                       );
                     },
                     child: CachedNetworkImage(
                       imageUrl:
-                          'https://image.tmdb.org/t/p/original${movie.posterPath}',
+                          'https://image.tmdb.org/t/p/original${widget.movie.posterPath}',
                       placeholder: (context, url) => const LoadingIndicator(),
                       errorWidget: (context, url, error) =>
                           const Center(child:  Icon(Icons.error)),
@@ -42,8 +54,21 @@ class MoviesListSectionItem extends StatelessWidget {
                       fit: BoxFit.fill,
                     ),
                   ),
+                  isWatchList ?
                   InkWell(
-                    onTap: () {},
+                    onTap: () async {
+                      FirebaseUtils.deleteMovieFromWatchList(widget.movie.id!);
+                      Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                    },
+                    child: Image.asset(
+                      'assets/images/bookmark_done.png',
+                    ),
+                  ) :
+                  InkWell(
+                    onTap: () async {
+                      FirebaseUtils.addMovieToWatchList(widget.movie);
+                      Provider.of<WatchlistProvider>(context,listen: false).getWatchListMovies();
+                    },
                     child: Image.asset(
                       'assets/images/bookmark.png',
                     ),
@@ -51,7 +76,7 @@ class MoviesListSectionItem extends StatelessWidget {
                 ],
               ),
             ),
-            if (hasBottomDescription)
+            if (widget.hasBottomDescription)
               Padding(
                 padding: const EdgeInsetsDirectional.only(start: 8),
                 child: Column(
@@ -68,7 +93,7 @@ class MoviesListSectionItem extends StatelessWidget {
                           width: 8,
                         ),
                         Text(
-                          movie.voteAverage?.toStringAsFixed(1) ?? 'not Known',
+                          widget.movie.voteAverage?.toStringAsFixed(1) ?? 'not Known',
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
@@ -77,7 +102,7 @@ class MoviesListSectionItem extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      movie.title ?? '',
+                      widget.movie.title ?? '',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
@@ -85,12 +110,12 @@ class MoviesListSectionItem extends StatelessWidget {
                           .titleSmall!
                           .copyWith(fontSize: 12),
                     ),
-                    movie.releaseDate !='' && movie.releaseDate != null ? Text(
-                      '${movie.releaseDate?.substring(0, 4)} R 1h 59m',
+                    widget.movie.releaseDate !='' && widget.movie.releaseDate != null ? Text(
+                      '${widget.movie.releaseDate?.substring(0, 4)} R 1h 59m',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall,
-                    ) : SizedBox(),
+                    ) : const SizedBox(),
                   ],
                 ),
               ),
